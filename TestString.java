@@ -35,7 +35,7 @@ public class TestString{
 
 	int a=0, e=0, i=0, o=0, u=0;
 	int SIZE  = 50;
-//	int[][] vol = new int[SIZE][SIZE];
+	int[][] vol = new int[SIZE][SIZE];
 //	int[][] con = new int[SIZE][SIZE];
 //	int[][] longconst = new int[SIZE][SIZE];
 //	int[][] longvol = new int[SIZE][SIZE];
@@ -43,7 +43,10 @@ public class TestString{
 	int numVow = 0;
 	int numConst = 0;
 	int numNon = 0;
+	int space = 0;
+	int dot = 0;
 
+	LongestWordLength longest = new LongestWordLength();
 	Scanner in = new Scanner(System.in);
 	System.out.print("Insert Text: (press 'Return' to mark end of input)\n");
 	String input = in.nextLine();
@@ -51,9 +54,9 @@ public class TestString{
 	input = input.toUpperCase();
 
 
-	//vowel
+
 	for( int t= 0; t<input.length(); t++)
-	{
+	{		//vowel
 			if (input.charAt(t) == 'A' || input.charAt(t) == 'E' || input.charAt(t) == 'I' || input.charAt(t) == 'O' || input.charAt(t) == 'U')
 			{
 				 numVow++;
@@ -63,35 +66,65 @@ public class TestString{
 	     	{
 	             numConst++;
             }
-            //non alphabet
-            else if (Character.isSpaceChar(input.charAt(i)))
-			{
-				  numNon++;
-            }
+			//space
+			space = input.length() - input.replaceAll(" ", "").length();
+			//dot
+    		dot = input.length() - input.replace(".", "").length();
+
 
 	}
-	LongestWordLength longest = new LongestWordLength(input);
 
+	System.out.println();
 	System.out.println("Number of vowels: " + numVow);
 	System.out.println("Number of consonants: " + numConst);
-	System.out.println("Other Characters: " + numNon);
-	System.out.println("The longest word: " + longest);
+	System.out.println("Other Characters: [blank space] " + space +" [.] " + dot);
+	System.out.println("The longest word: " + longest.WordLength(input));
+
 }}
 
 class LongestWordLength{
 
-	public LongestWordLength(String str)
+	public String WordLength(String str)
 	{
-		String[] longest = new String[50] ;
-		 String[] words = str.split(" ");
-		 int length = 0;
-
-				for(String word:words){
-					if(length < word.length()){
-						length = word.length();
-						longest=words;
-					}
-				}
-		System.out.println("The longest word: " + length);
+		String word;
+		word = Arrays.stream(str.split(" ")).max(Comparator.comparingInt(String::length)).orElse(null);
+		return word;
 	}
 }
+
+/*class Vowel{
+	String[][] alpha;
+	int a=0, e=0, i=0, o=0, u=0;
+	public char Word(char[] str, int count)
+	{
+		//for(int tt=0; t<count;tt++){
+		for(int t=0; t<count;t++)
+		if(str.charAt(tt) == 'A'){
+			alpha[t] = str.charAt(t);
+		  	t++;
+		 // 	alpha[tt][t] = a++;
+		 }
+		if(alpha.charAt(tt) == 'E'){
+			alpha[t] = str.charAt(t);
+			t++;
+		  //	alpha[tt][t] = e++;
+		 }
+		if(alpha.charAt(tt) == 'I'){
+			alpha[t] = str.charAt(t);
+			t++;
+		  //	alpha[tt][t] = i++;
+		 }
+		 if(alpha.charAt(tt) == 'O'){
+			alpha[t] = str.charAt(t);
+			t++;
+		  	//alpha[tt][t] = o++;
+		 }
+		 else if(alpha.charAt(tt) == 'U'){
+			 alpha[t] = str.charAt(t);
+			 t++;
+		  //	alpha[tt][t] = u++;
+		 }
+		 return alpha[],count;
+	}
+
+}*/
