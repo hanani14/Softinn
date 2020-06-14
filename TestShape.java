@@ -32,8 +32,6 @@ public class TestShape{
 				    int shape3 = sh.nextInt();
 		         	d.printDiamond(shape3);
 		            break;
-		         /*case 'D' :
-		            System.out.println("You passed");*/
 		         default :
 		            System.out.println("Invalid shape");
 		            break;
@@ -96,9 +94,9 @@ class Triangle
 			for(int m = 0; m<=size; m++)
 			{
 				for(int n = m; n<size; n++)
-					System.out.print(" ");
+					{System.out.print(" ");}
 				for(int o=1; o<(m*2); o++)
-				    System.out.print("*");
+				    {System.out.print("*");}
 		   	 System.out.print("\n");
 			}
 		}
